@@ -5,6 +5,7 @@
 import 'react-native';
 import React from 'react';
 import App from '../App';
+import GalleryScreen from '../src/screens/GalleryScreen';
 
 // Note: test renderer must be required after react-native.
 import renderer from 'react-test-renderer';
