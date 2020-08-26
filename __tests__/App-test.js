@@ -4,12 +4,17 @@
 
 import 'react-native';
 import React from 'react';
-import App from '../App';
-import GalleryScreen from '../src/screens/GalleryScreen';
+import PhotoList from '../src/components/PhotoList';
 
 // Note: test renderer must be required after react-native.
 import renderer from 'react-test-renderer';
 
-it('renders correctly', () => {
-  renderer.create(<App />);
+global.fetch = jest.fn(() => new Promise(resolve => resolve()));
+jest.mock('react-native-gesture-handler', () => {});
+jest.mock('@react-navigation/native', () => { createStackNavigator: {} });
+jest.mock('@react-navigation/stack', () => { BaseButton: {} });
+
+test('PhotoList renders correctly', () => {
+  const list = renderer.create(<PhotoList photos={[]} navigation={{navigate:{}}} />).toJSON();
+  expect(list).toMatchSnapshot();
 });
